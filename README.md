@@ -173,12 +173,10 @@ Este proyecto utiliza una variedad de librerías para diferentes funcionalidades
 
 ## Contribuciones
 
-Este proyecto ha sido desarrollado por [Diegoval-Dev](https://github.com/Diegoval-Dev), quien es el único contribuidor.
+Este proyecto ha sido desarrollado por [Diegoval-Dev](https://github.com/Diegoval-Dev)
 
-## Licencia
+## Foto
 
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para obtener más información.
+![alt text](image.png)
 
----
 
-¿Hay algo más que quisieras agregar o detallar en este README? Estoy aquí para ayudarte a hacer ajustes.

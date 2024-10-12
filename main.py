@@ -2,7 +2,7 @@ from backend.core2 import run_llm
 import streamlit as st
 from streamlit_chat import message
 
-st.header("LangChain - Documentation Helper Bot")
+st.header("NextJS - Documentation Helper Bot")
 
 prompt = st.text_input("Prompt", placeholder="Enter Your prompt here")
 
