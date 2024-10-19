@@ -4,7 +4,23 @@ from streamlit_chat import message
 
 st.header("NextJS - Documentation Helper Bot")
 
+# Preguntas relacionadas con Next.js
+questions = [
+    "¿Qué es Next.js y cuáles son sus principales características?",
+    "¿Qué novedades trae",
+    "¿Cómo funciona el enrutamiento en y qué cambios hay respecto a versiones anteriores?",
+    "¿Cuáles son las ventajas de usar el App Router4?",
+    "¿Cómo puedo optimizar el rendimiento?"
+]
+
+
+for question in questions:
+    if st.button(question):
+        st.session_state["user_prompt_history"].append(question)
+
+
 prompt = st.text_input("Prompt", placeholder="Enter Your prompt here")
+
 
 if (
         "chat_answers_history" not in st.session_state
@@ -28,10 +44,12 @@ def create_sources_string(source_urls: set[str]) -> str:
     return sources_string
 
 
-if prompt:
+if prompt or st.session_state["user_prompt_history"]:
+    user_input = prompt or st.session_state["user_prompt_history"][-1]
+
     with st.spinner(text="Loading sources..."):
         generated_response = run_llm(
-            query=prompt,
+            query=user_input,
             chat_history=st.session_state["chat_history"],
         )
         sources = set([doc.metadata["source"] for doc in generated_response["source"]])
@@ -39,11 +57,12 @@ if prompt:
             f"{generated_response['result']}\n\n{create_sources_string(sources)}"
         )
 
-        st.session_state["user_prompt_history"].append(prompt)
+        # Guardar el historial de chat
         st.session_state["chat_answers_history"].append(formatted_response)
-        st.session_state["chat_history"].append(("human", prompt))
+        st.session_state["chat_history"].append(("human", user_input))
         st.session_state["chat_history"].append(("ai", generated_response["result"]))
 
+    # Mostrar el historial de la conversación
     if "chat_answers_history" in st.session_state:
         for generated_response, user_query in zip(
                 st.session_state["chat_answers_history"],

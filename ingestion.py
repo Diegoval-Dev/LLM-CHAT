@@ -35,17 +35,28 @@ def ingest_docs():
         documents, embeddings, index_name=INDEX_NAME
     )
 
+
 def ingest_docs2() -> None:
     app = FirecrawlApp(api_key=os.getenv("FIRECRAWL_API_KEY"))
-    url = "https://nextjs.org/docs"
 
-    page_content = app.scrape_url(url=url,
-                                        params={"onlyMainContent": True})
-    print(page_content)
-    doc = Document(page_content=str(page_content), metadata={"source": url})
+    urls = [
+        "https://emapeire.medium.com/next-js-14-2d50c6471491",
+        "https://codigoencasa.com/next-js-14-una-nueva-era/",
+        "https://apiumhub.com/es/tech-blog-barcelona/que-hay-de-nuevo-en-nextjs/"
+    ]
+
+    documents = []
+
+    for url in urls:
+        page_content = app.scrape_url(url=url, params={"onlyMainContent": True})
+        print(f"Scraped content from: {url}")
+        doc = Document(page_content=str(page_content), metadata={"source": url})
+        documents.append(doc)
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    docs = text_splitter.split_documents([doc])
+    docs = text_splitter.split_documents(documents)
+
+    print(f"Going to add {len(docs)} documents to Pinecone")
 
     PineconeVectorStore.from_documents(docs, embeddings, index_name=os.getenv("INDEX_NAME"))
 
