@@ -179,4 +179,8 @@ Este proyecto ha sido desarrollado por [Diegoval-Dev](https://github.com/Diegova
 
 ![alt text](image.png)
 
-[LLMPROYECT1.mp4](..%2F..%2Fdiego%2FDescargas%2FLLMPROYECT1.mp4)
+
+
+https://github.com/user-attachments/assets/b93a1418-e664-4a3a-8840-4dcc3512dfb9
+
+
